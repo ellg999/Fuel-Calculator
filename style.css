@@ -2,13 +2,19 @@
     --bg-black: #000000; 
     --text-white: #FFFFFF; 
     --text-muted: #94A3B8; 
-    --accent-blue: #3B82F6; 
+    --accent-blue: #1D4ED8; /* Aksen biru disesuaikan menjadi lebih gelap dan elegan */
     --border-light: rgba(255, 255, 255, 0.15); 
-    --container-bg: rgba(255, 255, 255, 0.04); 
+    --container-bg: rgba(255, 255, 255, 0.03); 
+    
+    /* Palet Warna Kertas Struk */
+    --receipt-bg: #F8FAFC;
+    --receipt-text: #0F172A;
+    --receipt-muted: #64748B;
+    --receipt-border: rgba(0, 0, 0, 0.15);
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: var(--bg-black);
     color: var(--text-white);
     margin: 0;
@@ -31,7 +37,7 @@ body {
 }
 
 h1 {
-    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
     text-align: center;
     font-size: 26px;
     margin-top: 0;
@@ -51,30 +57,53 @@ label {
     font-weight: 500;
 }
 
+/* Micro-Interaction: Input dengan Ikon */
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon .icon {
+    position: absolute;
+    left: 16px;
+    color: var(--text-muted);
+    display: flex;
+    transition: color 0.3s ease;
+}
+
 input, select {
     width: 100%;
-    padding: 14px;
+    padding: 14px 14px 14px 45px; /* Spasi kiri 45px untuk tempat ikon */
     border-radius: 12px;
     background: transparent;
     border: 1px solid var(--border-light);
     color: var(--text-white);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', monospace;
     font-size: 16px;
     box-sizing: border-box;
     transition: all 0.3s ease;
-}
-
-input:focus, select:focus {
-    outline: none;
-    border-color: var(--accent-blue);
-    background: rgba(59, 130, 246, 0.05);
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
 }
 
 select option {
     background-color: var(--bg-black);
     color: var(--text-white);
 }
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    background: rgba(29, 78, 216, 0.05);
+    box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.15);
+}
+
+/* Membuat ikon menyala saat kolom diklik */
+input:focus + .icon, select:focus + .icon, 
+.input-with-icon:focus-within .icon {
+    color: var(--accent-blue);
+}
+
+/* Grid & Kartu Motor */
 .motor-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -82,13 +111,14 @@ select option {
 }
 
 .motor-card {
+    position: relative; /* Penting untuk posisi centang */
     background: transparent;
     border: 1px solid var(--border-light);
     border-radius: 12px;
     padding: 12px 5px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .motor-card img {
@@ -112,7 +142,7 @@ select option {
 }
 
 .motor-card.selected {
-    background: rgba(59, 130, 246, 0.1);
+    background: rgba(29, 78, 216, 0.1);
     border-color: var(--accent-blue);
 }
 
@@ -121,81 +151,91 @@ select option {
     font-weight: 600;
 }
 
-button {
+/* Ikon Centang (Checkmark) Otomatis via CSS */
+.motor-card.selected::after {
+    content: "✓";
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: var(--accent-blue);
+    color: white;
+    font-size: 10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* Tombol Utama (Efek Glow Gradasi) */
+.btn-cetak {
     width: 100%;
     padding: 16px;
     margin-top: 15px;
     border: none;
     border-radius: 12px;
-    background: var(--text-white); 
-    color: var(--bg-black); 
-    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+    color: white; 
+    font-family: 'Poppins', sans-serif;
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(29, 78, 216, 0.2);
 }
 
-button:hover {
-    background: var(--accent-blue);
-    color: white;
+.btn-cetak:hover {
     transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5); /* Efek cahaya keluar */
 }
 
-/* Struk awalnya disembunyikan */
+/* ================================
+   ANIMASI STRUK KERTAS FISIK
+   ================================ */
+
 .receipt-box {
-    background: #111111; 
+    background: var(--receipt-bg); 
     padding: 25px;
-    border: 1px solid var(--border-light);
     border-radius: 4px; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     display: none; 
     position: relative;
     overflow: hidden; 
+    color: var(--receipt-text); /* Teks struk jadi gelap */
 }
 
-/* Ini adalah kelas yang dipanggil JS untuk efek nge-print */
 .receipt-box.printing {
     display: block;
-    animation: cetakStruk 1.5s ease-out forwards; /* Efek keluar lambat seperti printer */
+    animation: cetakStruk 1.5s ease-out forwards; 
 }
 
 @keyframes cetakStruk {
-    0% {
-        max-height: 0px;
-        opacity: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-    100% {
-        max-height: 800px;
-        opacity: 1;
-        padding-top: 25px;
-        padding-bottom: 25px;
-    }
+    0% { max-height: 0px; opacity: 0; padding-top: 0; padding-bottom: 0; }
+    100% { max-height: 850px; opacity: 1; padding-top: 25px; padding-bottom: 25px; }
 }
 
 .receipt-box::before, .receipt-box::after {
     content: "";
     position: absolute;
-    left: 0;
-    right: 0;
-    height: 6px;
+    left: 0; right: 0; height: 6px;
     background-size: 12px 100%;
 }
 .receipt-box::before {
     top: -6px;
-    background-image: radial-gradient(circle at 6px 0, transparent 6px, #111111 7px);
+    background-image: radial-gradient(circle at 6px 0, transparent 6px, var(--receipt-bg) 7px);
 }
 .receipt-box::after {
     bottom: -6px;
-    background-image: radial-gradient(circle at 6px 6px, transparent 6px, #111111 7px);
+    background-image: radial-gradient(circle at 6px 6px, transparent 6px, var(--receipt-bg) 7px);
 }
 
 .receipt-header {
     text-align: center;
     font-family: 'Space Grotesk', monospace;
-    border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
+    border-bottom: 2px dashed var(--receipt-border);
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
@@ -204,13 +244,13 @@ button:hover {
     margin: 0;
     font-size: 16px;
     letter-spacing: 2px;
-    color: var(--text-white);
+    font-weight: 700;
 }
 
 .receipt-header p {
     margin: 5px 0 0;
     font-size: 11px;
-    color: var(--text-muted);
+    color: var(--receipt-muted);
 }
 
 .receipt-item {
@@ -219,17 +259,16 @@ button:hover {
     margin-bottom: 12px;
     font-size: 13px;
     font-family: 'Space Grotesk', monospace;
-    color: var(--text-white);
 }
 
 .receipt-item span:last-child {
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .receipt-total {
     margin-top: 20px;
     padding-top: 15px;
-    border-top: 2px dashed rgba(255, 255, 255, 0.2);
+    border-top: 2px dashed var(--receipt-border);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -241,29 +280,82 @@ button:hover {
     font-size: 16px;
     font-weight: bold;
     font-family: 'Space Grotesk', monospace;
-    color: var(--text-white);
 }
+
 .receipt-note {
     text-align: center;
     font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 25px; /* Jarak Note dari kotak Total di atasnya */
-    margin-bottom: 20px; /* Jarak Note ke tombol Hitung Ulang di bawahnya */
+    color: var(--receipt-muted);
+    margin-top: 25px; 
+    margin-bottom: 25px; 
     font-style: italic;
-    line-height: 1.4; /* Merapatkan spasi antar baris */
+    line-height: 1.4; 
 }
 
-/* Mengatur agar kalimat 1 dan kalimat 2 saling berdekatan */
 .receipt-note p {
-    margin: 4px 0; /* Angka 4px ini mengatur seberapa dekat jarak antar kalimat, semakin kecil semakin dekat */
+    margin: 4px 0; 
 }
+
+/* Efek Barcode Menggunakan CSS murni (Tanpa Gambar Tambahan) */
+.barcode-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.barcode {
+    width: 160px;
+    height: 40px;
+    background-image: repeating-linear-gradient(
+        to right,
+        var(--receipt-text) 0, var(--receipt-text) 2px,
+        transparent 2px, transparent 4px,
+        var(--receipt-text) 4px, var(--receipt-text) 5px,
+        transparent 5px, transparent 8px,
+        var(--receipt-text) 8px, var(--receipt-text) 12px,
+        transparent 12px, transparent 14px
+    );
+    opacity: 0.8;
+}
+
+.barcode-section p {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 10px;
+    color: var(--receipt-muted);
+    margin-top: 8px;
+    letter-spacing: 2px;
+}
+
+/* Tombol Kembali khusus Struk */
 .btn-kembali {
+    width: 100%;
+    padding: 14px;
     background: transparent;
-    border: 1px solid var(--text-muted);
-    color: var(--text-muted);
-    margin-top: 25px;
+    border: 1px solid var(--receipt-muted);
+    border-radius: 8px;
+    color: var(--receipt-text);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
+
 .btn-kembali:hover {
-    background: var(--text-muted);
-    color: var(--bg-black);
+    background: #E2E8F0; /* Abu-abu terang saat di-hover */
+}
+
+/* ================================
+   RESPONSIVE LAYOUT UNTUK LAYAR HP
+   ================================ */
+@media (max-width: 480px) {
+    .motor-grid {
+        /* Ubah jadi 2 kolom di HP agar gambar tidak gepeng */
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    
+    .container {
+        padding: 20px 15px;
+    }
 }
