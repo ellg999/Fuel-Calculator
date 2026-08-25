@@ -1,15 +1,16 @@
 :root {
-    --bg-white: #000000;
-    --text-dark: #FFFFFF;
-    --text-muted: #64748B;
-    --accent-blue: #3B82F6;
-    --border-light: rgba(0, 0, 0, 0.08);
+    --bg-black: #000000; /* Background hitam murni */
+    --text-white: #FFFFFF; /* Teks putih */
+    --text-muted: #94A3B8; /* Teks abu-abu untuk deskripsi */
+    --accent-blue: #3B82F6; /* Aksen biru tetap dipertahankan */
+    --border-light: rgba(255, 255, 255, 0.15); /* Border putih transparan */
+    --container-bg: rgba(255, 255, 255, 0.04); /* Kaca transparan sangat tipis */
 }
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg-white);
-    color: var(--text-dark);
+    background-color: var(--bg-black);
+    color: var(--text-white);
     margin: 0;
     padding: 40px 20px;
     display: flex;
@@ -20,11 +21,12 @@ body {
 .container {
     max-width: 550px;
     width: 100%;
-    background: rgba(255, 255, 255, 0.5);
+    /* Efek transparan yang menyatu dengan hitam */
+    background: var(--container-bg);
     padding: 30px;
     border-radius: 20px;
     border: 1px solid var(--border-light);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
 h1 {
@@ -33,7 +35,7 @@ h1 {
     font-size: 26px;
     margin-top: 0;
     margin-bottom: 30px;
-    color: var(--text-dark);
+    color: var(--text-white);
 }
 
 .form-group {
@@ -54,7 +56,7 @@ input {
     border-radius: 12px;
     background: transparent;
     border: 1px solid var(--border-light);
-    color: var(--text-dark);
+    color: var(--text-white);
     font-family: 'Space Grotesk', sans-serif;
     font-size: 16px;
     box-sizing: border-box;
@@ -64,8 +66,8 @@ input {
 input:focus {
     outline: none;
     border-color: var(--accent-blue);
-    background: rgba(59, 130, 246, 0.02);
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    background: rgba(59, 130, 246, 0.05);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
 }
 
 .motor-grid {
@@ -100,12 +102,12 @@ input:focus {
 }
 
 .motor-card:hover {
-    border-color: #CBD5E1;
-    background: rgba(0, 0, 0, 0.01);
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.02);
 }
 
 .motor-card.selected {
-    background: rgba(59, 130, 246, 0.05);
+    background: rgba(59, 130, 246, 0.1);
     border-color: var(--accent-blue);
 }
 
@@ -120,28 +122,29 @@ button {
     margin-top: 15px;
     border: none;
     border-radius: 12px;
-    background: var(--text-dark);
-    color: white;
+    background: var(--text-white); /* Tombol putih */
+    color: var(--bg-black); /* Teks tombol hitam */
     font-family: 'Outfit', sans-serif;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 button:hover {
     background: var(--accent-blue);
+    color: white;
     transform: translateY(-2px);
 }
 
-/* Desain ala Struk (Receipt) */
+/* Desain ala Struk (Receipt) versi Dark Mode */
 .receipt-box {
-    background: #FFFFFF;
+    background: #111111; /* Warna struk abu-abu sangat gelap */
     padding: 25px;
     margin-top: 35px;
-    border: 1px solid #E2E8F0;
+    border: 1px solid var(--border-light);
     border-radius: 4px; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     display: none;
     position: relative;
 }
@@ -156,17 +159,17 @@ button:hover {
 }
 .receipt-box::before {
     top: -6px;
-    background-image: radial-gradient(circle at 6px 0, transparent 6px, #FFFFFF 7px);
+    background-image: radial-gradient(circle at 6px 0, transparent 6px, #111111 7px);
 }
 .receipt-box::after {
     bottom: -6px;
-    background-image: radial-gradient(circle at 6px 6px, transparent 6px, #FFFFFF 7px);
+    background-image: radial-gradient(circle at 6px 6px, transparent 6px, #111111 7px);
 }
 
 .receipt-header {
     text-align: center;
     font-family: 'Space Grotesk', monospace;
-    border-bottom: 2px dashed #CBD5E1;
+    border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
@@ -175,6 +178,7 @@ button:hover {
     margin: 0;
     font-size: 16px;
     letter-spacing: 2px;
+    color: var(--text-white);
 }
 
 .receipt-header p {
@@ -189,6 +193,7 @@ button:hover {
     margin-bottom: 12px;
     font-size: 13px;
     font-family: 'Space Grotesk', monospace;
+    color: var(--text-white);
 }
 
 .receipt-item span:last-child {
@@ -198,7 +203,7 @@ button:hover {
 .receipt-total {
     margin-top: 20px;
     padding-top: 15px;
-    border-top: 2px dashed #CBD5E1;
+    border-top: 2px dashed rgba(255, 255, 255, 0.2);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -210,6 +215,7 @@ button:hover {
     font-size: 16px;
     font-weight: bold;
     font-family: 'Space Grotesk', monospace;
+    color: var(--text-white);
 }
 
 .receipt-note {
