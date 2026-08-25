@@ -3,61 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fuel Calculator</title>
-    <!-- Import Font -->
+    <title>Fuel Calculator Minimalis</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    
-    <!-- Menghubungkan ke file CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-    <h1>Kalkulator BBM</h1>
+    
+    <!-- BAGIAN FORM (Akan disembunyikan saat struk keluar) -->
+    <div id="form-section">
+        <h1>Kalkulator BBM</h1>
 
-    <div class="form-group">
-        <label>Jarak Sekali Jalan (Km)</label>
-        <input type="number" id="jarak" placeholder="Contoh: 60">
-    </div>
-
-    <div class="form-group">
-        <label>Pilih Jenis Motor</label>
-       <div class="motor-grid">
-            <div class="motor-card selected" onclick="pilihMotor('beat_karbu', this)">
-                <img src="Foto/beat karbu.png" alt="Beat Karbu">
-                <span>Beat Karbu (08-12)</span>
-            </div>
-            <div class="motor-card" onclick="pilihMotor('beat_deluxe', this)">
-                <img src="Foto/beat new.png" alt="Beat Deluxe">
-                <span>Beat Deluxe ISS</span>
-            </div>
-            <div class="motor-card" onclick="pilihMotor('vario_125_old', this)">
-                <img src="Foto/vario 125.png" alt="Vario 125 Old">
-                <span>Vario 125</span>
-            </div>
-            <div class="motor-card" onclick="pilihMotor('vario_150', this)">
-                <img src="Foto/vario 150.png" alt="Vario 150">
-                <span>Vario 150</span>
-            </div>
-            <div class="motor-card" onclick="pilihMotor('pcx_150', this)">
-                <img src="Foto/pcx 150.png" alt="PCX 150">
-                <span>Honda PCX 150</span>
-            </div>
-            <div class="motor-card" onclick="pilihMotor('nmax_155', this)">
-                <img src="Foto/nmax 150.png" alt="NMAX 155">
-                <span>Yamaha NMAX 155</span>
-            </div>
+        <div class="form-group">
+            <label>Jarak Sekali Jalan (Km)</label>
+            <input type="number" id="jarak" placeholder="Contoh: 60">
         </div>
-        <input type="hidden" id="selected-motor" value="beat_karbu">
 
-    <div class="form-group">
-        <label>Harga 1x Isi Full Tank (Rp)</label>
-        <input type="number" id="harga_fulltank" placeholder="Contoh: 25000">
+        <div class="form-group">
+            <label>Pilih Jenis Motor</label>
+            <div class="motor-grid">
+                <div class="motor-card selected" onclick="pilihMotor('beat_karbu', this)">
+                    <img src="Foto/beat karbu.png" alt="Beat Karbu">
+                    <span>Beat Karbu (08-12)</span>
+                </div>
+                <div class="motor-card" onclick="pilihMotor('beat_deluxe', this)">
+                    <img src="Foto/beat deluxe.jpg" alt="Beat Deluxe">
+                    <span>Beat Deluxe ISS</span>
+                </div>
+                <div class="motor-card" onclick="pilihMotor('vario_125_old', this)">
+                    <img src="Foto/vario 125.png" alt="Vario 125 Old">
+                    <span>Vario 125</span>
+                </div>
+                <div class="motor-card" onclick="pilihMotor('vario_150', this)">
+                    <img src="Foto/vario 150.jpg" alt="Vario 150">
+                    <span>Vario 150</span>
+                </div>
+                <div class="motor-card" onclick="pilihMotor('pcx_150', this)">
+                    <img src="Foto/pcx 150.png" alt="PCX 150">
+                    <span>Honda PCX 150</span>
+                </div>
+                <div class="motor-card" onclick="pilihMotor('nmax_155', this)">
+                    <img src="Foto/nmax 150.jpg" alt="NMAX 155">
+                    <span>Yamaha NMAX 155</span>
+                </div>
+            </div>
+            <input type="hidden" id="selected-motor" value="beat_karbu">
+        </div>
+
+        <div class="form-group">
+            <label>Harga 1x Isi Full Tank (Rp)</label>
+            <input type="number" id="harga_fulltank" placeholder="Contoh: 25000">
+        </div>
+
+        <button onclick="hitungBensin()">Cetak Estimasi</button>
     </div>
 
-    <button onclick="hitungBensin()">Cetak Estimasi</button>
-
-    <!-- Hasil Berupa Struk (Receipt) -->
+    <!-- BAGIAN STRUK (Akan muncul dengan efek animasi) -->
     <div class="receipt-box" id="receipt-box">
         <div class="receipt-header">
             <h2>STRUK ESTIMASI BBM</h2>
@@ -91,11 +93,12 @@
         <div class="receipt-note">
             "Sistem menyarankan isi full tank agar aman di perjalanan."
         </div>
+
+        <!-- Tombol untuk kembali ke pengisian awal -->
+        <button class="btn-kembali" onclick="hitungUlang()">Hitung Ulang</button>
     </div>
 </div>
 
-<!-- Menghubungkan ke file JavaScript -->
 <script src="script.js"></script>
-
 </body>
 </html>
