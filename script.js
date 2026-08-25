@@ -9,15 +9,14 @@ function pilihMotor(tipe, element) {
     // Tambahkan warna biru ke kartu yang barusan diklik
     element.classList.add('selected');
 }
-
-// Database Efisiensi Motor (Km per Liter) - Realita Jalanan
+// Database Efisiensi Motor (Km per Liter) - 
 const motorDB = {
-    beat_lama:  { konsumsi: 35 }, 
-    beat_baru:  { konsumsi: 53 }, 
-    vario_lama: { konsumsi: 38 }, 
-    vario_baru: { konsumsi: 44 }, 
-    pcx:        { konsumsi: 41 }, 
-    nmax:       { konsumsi: 39 }
+    beat_karbu:    { konsumsi: 35 }, // Beat Karbu 2008-2012 
+    beat_deluxe:   { konsumsi: 58 }, // Beat Deluxe CBS ISS 
+    vario_125_old: { konsumsi: 43 }, // Vario 125 Old 
+    vario_150:     { konsumsi: 41 }, // Vario 150 
+    pcx_150:       { konsumsi: 40 }, // PCX 150 
+    nmax_155:      { konsumsi: 38 }  // NMAX 155 
 };
 
 const hargaPerLiter = 10000; 
