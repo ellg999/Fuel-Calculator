@@ -3,191 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fuel Calculator</title>
-    <!-- Import 3 Font: Outfit, Inter, Space Grotesk -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <title>Futuristic Fuel Calculator</title>
+    <!-- Kombinasi 3 font simpel selain Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-blue: #0A0F1D; /* Biru gelap futuristik */
-            --card-blue: #141E33;
-            --card-hover: #1E293B;
-            --accent-green: #10B981; /* Hijau alam */
-            --accent-orange: #F97316; /* Oranye aksen */
-            --text-main: #F8FAFC;
-            --text-muted: #94A3B8;
+            --primary-blue: #3B82F6;
+            --light-blue: #93C5FD;
+            --neon-blue: #60A5FA;
+            --text-white: #FFFFFF;
+            --text-soft: #E2E8F0;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-blue);
-            color: var(--text-main);
+            /* Latar belakang gradasi biru gelap */
+            background: linear-gradient(135deg, #020617, #1e3a8a, #0f172a);
+            background-size: 200% 200%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-white);
             margin: 0;
             padding: 40px 20px;
             display: flex;
             justify-content: center;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
-            max-width: 650px;
+            max-width: 600px;
             width: 100%;
-            background: var(--card-blue);
-            padding: 35px;
+            /* Efek Glassmorphism transparan */
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 40px 30px;
             border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            border-top: 4px solid var(--accent-green);
-            border-bottom: 4px solid var(--accent-orange);
+            border: 1px solid rgba(255, 255, 255, 0.05); /* Border sangat transparan */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         h1 {
             font-family: 'Outfit', sans-serif;
             text-align: center;
             font-size: 28px;
-            margin-bottom: 35px;
-            background: -webkit-linear-gradient(45deg, var(--accent-green), var(--accent-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 0.5px;
-        }
-
-        .section-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: var(--accent-green);
-            border-bottom: 1px solid #1E293B;
-            padding-bottom: 8px;
-            margin-top: 25px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            color: var(--text-white);
+            text-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         label {
             display: block;
             font-size: 14px;
-            margin-bottom: 8px;
-            color: var(--text-muted);
-            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--light-blue);
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
         input {
             width: 100%;
-            padding: 14px;
+            padding: 15px;
             border-radius: 12px;
-            border: 1px solid #283548;
-            background: #0A0F1D;
-            color: white;
-            font-family: 'Inter', sans-serif;
+            /* Input transparan */
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
             box-sizing: border-box;
             transition: all 0.3s ease;
-            font-size: 15px;
         }
 
+        /* Soft interactive text styling pada input */
         input:focus {
             outline: none;
-            border-color: var(--accent-green);
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.2);
+            color: var(--neon-blue); 
         }
 
-        /* Styling Kartu Motor Bergeser / Grid */
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Kartu Motor Transparan */
         .motor-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-            gap: 12px;
-            margin-bottom: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
         }
 
         .motor-card {
-            background: #0A0F1D;
-            border: 2px solid #283548;
-            border-radius: 14px;
-            padding: 12px 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 15px 10px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
         }
 
         .motor-card img {
             width: 100%;
-            height: 60px;
+            height: 50px;
             object-fit: contain;
-            margin-bottom: 8px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+            margin-bottom: 10px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
         }
 
         .motor-card span {
             font-size: 12px;
-            font-weight: 500;
-            color: var(--text-muted);
+            font-weight: 300;
+            color: var(--text-soft);
             display: block;
+            transition: color 0.3s ease;
         }
 
+        /* Soft interactive hover & active state */
         .motor-card:hover {
-            border-color: var(--text-muted);
-            background: var(--card-hover);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(96, 165, 250, 0.3);
         }
 
-        /* Saat Motor Dipilih */
         .motor-card.selected {
-            border-color: var(--accent-orange);
-            background: rgba(249, 115, 22, 0.1);
-            box-shadow: 0 0 15px rgba(249, 115, 22, 0.2);
+            background: rgba(59, 130, 246, 0.15);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.2);
+        }
+
+        .motor-card.selected img {
+            opacity: 1;
+            filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.5));
         }
 
         .motor-card.selected span {
-            color: var(--text-main);
-            font-weight: bold;
+            color: var(--neon-blue);
+            font-weight: 500;
         }
 
-        /* Tombol Kalkulasi */
+        /* Tombol Kalkulasi Futuristik */
         button {
             width: 100%;
-            padding: 16px;
-            margin-top: 15px;
-            border: none;
+            padding: 18px;
+            margin-top: 10px;
+            border: 1px solid rgba(96, 165, 250, 0.3);
             border-radius: 14px;
-            background: linear-gradient(135deg, var(--accent-green), #059669);
-            color: white;
+            background: rgba(59, 130, 246, 0.2);
+            backdrop-filter: blur(5px);
+            color: var(--text-white);
             font-family: 'Outfit', sans-serif;
             font-size: 16px;
-            font-weight: bold;
+            letter-spacing: 1px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
         }
 
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            background: rgba(59, 130, 246, 0.4);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         /* Kotak Hasil */
         .result-box {
-            background: #0A0F1D;
-            padding: 22px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 25px;
             border-radius: 16px;
             margin-top: 30px;
-            border: 1px solid #283548;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .result-box.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .result-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 14px;
+            margin-bottom: 15px;
             font-size: 14px;
+            color: var(--text-soft);
         }
 
         .result-item span:last-child {
             font-family: 'Space Grotesk', sans-serif;
-            font-weight: 500;
-            color: var(--accent-orange);
+            color: var(--text-white);
         }
 
         .total-box {
-            margin-top: 20px;
-            padding-top: 18px;
-            border-top: 2px dashed #283548;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -195,221 +222,145 @@
 
         .total-box span:first-child {
             font-family: 'Outfit', sans-serif;
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 16px;
+            color: var(--light-blue);
         }
 
         .total-box span:last-child {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--accent-green);
+            font-size: 28px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 20px rgba(96, 165, 250, 0.4);
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Rencanakan Perjalananmu Dengan Mudah</h1>
+    <h1>FUEL CALCULATOR</h1>
 
-    <!-- Pilihan Gunung & Registrasi -->
-    <div class="section-title">01. Informasi Pendakian</div>
     <div class="form-group">
-        <label>Pilihan Gunung</label>
-        <input type="text" id="gunung" placeholder="Contoh: Gunung Rinjani / Semeru">
-    </div>
-    <div class="form-group">
-        <label>Harga 1x Registrasi (Rp)</label>
-        <input type="number" id="registrasi" placeholder="Contoh: 25000">
+        <label>Tujuan Perjalanan</label>
+        <input type="text" id="tujuan" placeholder="Cth: Bandung, Pantai, Kantor...">
     </div>
 
-    <!-- Transportasi & Motor Bergambar -->
-    <div class="section-title">02. Kendaraan & Jarak</div>
     <div class="form-group">
-        <label>Pilih Jenis Motor Kamu</label>
-        <!-- Grid Pilihan Motor Menggunakan Gambar -->
+        <label>Jarak Sekali Jalan (Km)</label>
+        <input type="number" id="jarak" placeholder="Cth: 45">
+    </div>
+
+    <div class="form-group">
+        <label>Pilih Kendaraan</label>
         <div class="motor-grid">
             <div class="motor-card selected" onclick="pilihMotor('matic_entry', this)">
-                <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=200&auto=format&fit=crop&q=80" alt="Matic Kecil">
-                <span>Matic Kecil (Beat/Scoopy)</span>
+                <!-- GANTI src DI BAWAH DENGAN LINK/PATH FOTO MOTOR MATIC KECIL -->
+                <img src="" alt="Foto Matic Kecil">
+                <span>Matic Kecil</span>
             </div>
             <div class="motor-card" onclick="pilihMotor('matic_maxi', this)">
-                <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=200&auto=format&fit=crop&q=80" alt="Matic Besar">
-                <span>Matic Maxi (NMAX/PCX)</span>
+                <!-- GANTI src DI BAWAH DENGAN LINK/PATH FOTO MOTOR MATIC BESAR -->
+                <img src="" alt="Foto Matic Besar">
+                <span>Matic Besar</span>
             </div>
             <div class="motor-card" onclick="pilihMotor('bebek', this)">
-                <img src="https://images.unsplash.com/photo-1558980664-3a031cf67ea8?w=200&auto=format&fit=crop&q=80" alt="Bebek">
-                <span>Motor Bebek (Supra)</span>
+                <!-- GANTI src DI BAWAH DENGAN LINK/PATH FOTO MOTOR BEBEK -->
+                <img src="" alt="Foto Bebek">
+                <span>Bebek</span>
             </div>
             <div class="motor-card" onclick="pilihMotor('sport', this)">
-                <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=200&auto=format&fit=crop&q=80" alt="Sport">
-                <span>Sport (Vixion/CB)</span>
-            </div>
-            <div class="motor-card" onclick="pilihMotor('trail', this)">
-                <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=200&auto=format&fit=crop&q=80" alt="Trail">
-                <span>Trail (KLX/CRF)</span>
+                <!-- GANTI src DI BAWAH DENGAN LINK/PATH FOTO MOTOR SPORT -->
+                <img src="" alt="Foto Sport">
+                <span>Sport</span>
             </div>
         </div>
-        <!-- Hidden input untuk menyimpan tipe motor yang diklik -->
         <input type="hidden" id="selected-motor" value="matic_entry">
     </div>
 
     <div class="form-group">
-        <label>Jarak Rumah ke Basecamp (Km - Sekali Jalan)</label>
-        <input type="number" id="jarak" placeholder="Contoh: 85">
-    </div>
-    <div class="form-group">
-        <label>Berapa rupiah jika isi Bensin Full Tank? (Rp)</label>
-        <input type="number" id="harga_fulltank" placeholder="Contoh: 45000">
+        <label>Harga Bensin Full Tank (Rp)</label>
+        <input type="number" id="harga_fulltank" placeholder="Cth: 45000">
     </div>
 
-    <!-- Logistik -->
-    <div class="section-title">03. Logistik & Perlengkapan</div>
-    <div class="form-group">
-        <label>Makanan yang dibawa (Pisahkan dengan koma)</label>
-        <input type="text" id="makanan" placeholder="Indomie, Telur, Sosis, Beras, Roti">
-    </div>
-    <div class="form-group">
-        <label>Obat-obatan (Opsional - Pisahkan dengan koma)</label>
-        <input type="text" id="obat" placeholder="Paracetamol, Hansaplast, Tolak Angin">
-    </div>
+    <button onclick="hitungBensin()">Kalkulasi Bahan Bakar</button>
 
-    <button onclick="hitungEstimasi()">Kalkulasi Biaya Pendakian</button>
-
-    <!-- Hasil Kalkulasi (Terselubung Sampai Dihitung) -->
-    <div class="result-box" id="result-box" style="display: none;">
+    <div class="result-box" id="result-box">
         <div class="result-item">
-            <span>Estimasi Jarak Pergi-Pulang (PP):</span>
-            <span id="res-jarak-pp">0 Km</span>
+            <span>Estimasi Jarak (Pergi-Pulang):</span>
+            <span id="res-jarak">0 Km</span>
+        </div>
+        <div class="result-item">
+            <span>Kebutuhan Bensin:</span>
+            <span id="res-liter">0 Liter</span>
         </div>
         <div class="result-item">
             <span>Perkiraan Isi Bensin:</span>
             <span id="res-refill">0x Full Tank</span>
         </div>
-        <div class="result-item">
-            <span>Total Biaya Bensin (PP):</span>
-            <span id="res-bbm-total">Rp 0</span>
-        </div>
-        <div class="result-item">
-            <span>Estimasi Biaya Makanan:</span>
-            <span id="res-makanan">Rp 0</span>
-        </div>
-        <div class="result-item">
-            <span>Estimasi Biaya Obat:</span>
-            <span id="res-obat">Rp 0</span>
-        </div>
-        <div class="result-item">
-            <span>Biaya Registrasi Gunung:</span>
-            <span id="res-regis">Rp 0</span>
-        </div>
-        <div class="result-item">
-            <span>Uang Cadangan Darurat (20%):</span>
-            <span id="res-cadangan">Rp 0</span>
-        </div>
         
         <div class="total-box">
-            <span>Total Pengeluaran:</span>
+            <span>TOTAL BIAYA BBM (PP)</span>
             <span id="res-total">Rp 0</span>
         </div>
     </div>
 </div>
 
 <script>
-    // Menyimpan jenis motor yang aktif diklik user
     function pilihMotor(tipe, element) {
         document.getElementById('selected-motor').value = tipe;
         
-        // Hapus kelas 'selected' dari semua kartu
         const cards = document.querySelectorAll('.motor-card');
         cards.forEach(card => card.classList.remove('selected'));
         
-        // Tambahkan kelas 'selected' ke kartu yang diklik
         element.classList.add('selected');
     }
 
     // Database Efisiensi Motor (Km per Liter)
     const motorDB = {
-        matic_entry: { konsumsi: 52 }, // Beat/Scoopy
-        matic_maxi:  { konsumsi: 40 }, // NMAX/PCX
-        bebek:       { konsumsi: 58 }, // Supra/Revo
-        sport:       { konsumsi: 38 }, // Vixion/CB150R
-        trail:       { konsumsi: 32 }  // KLX/CRF
+        matic_entry: { konsumsi: 52 }, 
+        matic_maxi:  { konsumsi: 40 }, 
+        bebek:       { konsumsi: 58 }, 
+        sport:       { konsumsi: 38 }  
     };
 
-    const hargaPerLiter = 10000; // Standar asumsi Pertalite
+    const hargaPerLiter = 10000; // Asumsi Pertalite/Bensin standar
 
-    // Simulasi Harga Makanan/Obat di Pasaran
-    function estimasiHargaItem(items, tipe) {
-        if (!items.trim()) return 0;
-        const arr = items.split(',').map(item => item.trim().toLowerCase());
-        let total = 0;
-        
-        arr.forEach(item => {
-            if(tipe === 'makanan') {
-                if(item.includes('indomie') || item.includes('mie')) total += 3500;
-                else if(item.includes('telur')) total += 2500;
-                else if(item.includes('beras')) total += 15000;
-                else if(item.includes('sosis')) total += 15000;
-                else if(item.includes('roti')) total += 12000;
-                else total += 10000; 
-            } else if (tipe === 'obat') {
-                if(item.includes('koyo') || item.includes('hansaplast')) total += 5000;
-                else if(item.includes('paracetamol')) total += 4000;
-                else if(item.includes('tolak angin')) total += 5000;
-                else total += 8000; 
-            }
-        });
-        return total;
-    }
-
-    function formatRupiah(angka) {
-        return "Rp " + angka.toLocaleString('id-ID');
-    }
-
-    function hitungEstimasi() {
-        // Ambil Nilai Input
-        const regis = parseFloat(document.getElementById('registrasi').value) || 0;
+    function hitungBensin() {
         const jarakSekaliJalan = parseFloat(document.getElementById('jarak').value) || 0;
         const tipeMotor = document.getElementById('selected-motor').value;
-        const hargaFullTankUser = parseFloat(document.getElementById('harga_fulltank').value) || 0;
-        const makananInput = document.getElementById('makanan').value;
-        const obatInput = document.getElementById('obat').value;
+        const hargaFullTank = parseFloat(document.getElementById('harga_fulltank').value) || 0;
 
-        // Kalkulasi Jarak & Konsumsi BBM
         const jarakPP = jarakSekaliJalan * 2;
         const spekMotor = motorDB[tipeMotor];
         
-        // Kapasitas tangki berdasarkan uang full tank user dibagi harga bensin per liter
-        const kapasitasTangkiLiter = hargaFullTankUser / hargaPerLiter;
+        // Menentukan kapasitas tangki pengguna
+        const kapasitasTangki = hargaFullTank / hargaPerLiter;
         
-        // Liter bensin yang dihabiskan untuk perjalanan PP
+        // Kebutuhan liter bensin
         const literDibutuhkan = jarakPP / spekMotor.konsumsi;
+        
+        // Total Harga
         const totalBiayaBensin = Math.ceil(literDibutuhkan * hargaPerLiter);
         
-        // Perhitungan berapa kali isi full tank
-        let kaliIsi = kapasitasTangkiLiter > 0 ? (literDibutuhkan / kapasitasTangkiLiter) : 0;
-        kaliIsi = Math.max(1, kaliIsi).toFixed(1); // Minimal dihitung 1x isi dari rumah
+        // Berapa kali isi full tank
+        let kaliIsi = kapasitasTangki > 0 ? (literDibutuhkan / kapasitasTangki) : 0;
+        kaliIsi = Math.max(0.1, kaliIsi).toFixed(1);
 
-        // Kalkulasi Belanja Logistik
-        const biayaMakanan = estimasiHargaItem(makananInput, 'makanan');
-        const biayaObat = estimasiHargaItem(obatInput, 'obat');
-
-        // Kalkulasi Total & Cadangan 20%
-        const subTotal = regis + totalBiayaBensin + biayaMakanan + biayaObat;
-        const uangCadangan = subTotal * 0.20; 
-        const grandTotal = subTotal + uangCadangan;
-
-        // Tampilkan ke Antarmuka
-        document.getElementById('res-jarak-pp').innerText = `${jarakPP} Km`;
+        // Menampilkan ke layar
+        document.getElementById('res-jarak').innerText = `${jarakPP} Km`;
+        document.getElementById('res-liter').innerText = `${literDibutuhkan.toFixed(1)} Liter`;
         document.getElementById('res-refill').innerText = `~ ${kaliIsi}x Full Tank`;
-        document.getElementById('res-bbm-total').innerText = formatRupiah(totalBiayaBensin);
-        document.getElementById('res-makanan').innerText = formatRupiah(biayaMakanan);
-        document.getElementById('res-obat').innerText = formatRupiah(biayaObat);
-        document.getElementById('res-regis').innerText = formatRupiah(regis);
-        document.getElementById('res-cadangan').innerText = formatRupiah(uangCadangan);
-        document.getElementById('res-total').innerText = formatRupiah(grandTotal);
+        
+        // Format Rupiah
+        const formatRupiah = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        }).format(totalBiayaBensin);
+        
+        document.getElementById('res-total').innerText = formatRupiah;
 
-        document.getElementById('result-box').style.display = 'block';
+        // Tampilkan kotak hasil dengan animasi
+        document.getElementById('result-box').classList.add('show');
     }
 </script>
 
