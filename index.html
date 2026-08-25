@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fuel Calculator Minimalis</title>
+    <title>Fuel Calculator</title>
     <!-- Import Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
@@ -22,35 +22,34 @@
 
     <div class="form-group">
         <label>Pilih Jenis Motor</label>
-        <div class="motor-grid">
-            <div class="motor-card selected" onclick="pilihMotor('beat_lama', this)">
-                <img src="" alt="Beat Lama">
-                <span>Beat (Lama/Karbu)</span>
+       <div class="motor-grid">
+            <!-- Jangan lupa isi bagian src="" dengan link fotomu nanti ya -->
+            <div class="motor-card selected" onclick="pilihMotor('beat_karbu', this)">
+                <img src="" alt="Beat Karbu">
+                <span>Beat Karbu (08-12)</span>
             </div>
-            <div class="motor-card" onclick="pilihMotor('beat_baru', this)">
-                <img src="" alt="Beat Baru">
-                <span>Beat (Baru/FI)</span>
+            <div class="motor-card" onclick="pilihMotor('beat_deluxe', this)">
+                <img src="" alt="Beat Deluxe">
+                <span>Beat Deluxe ISS</span>
             </div>
-            <div class="motor-card" onclick="pilihMotor('vario_lama', this)">
-                <img src="" alt="Vario Lama">
-                <span>Vario (Lama)</span>
+            <div class="motor-card" onclick="pilihMotor('vario_125_old', this)">
+                <img src="" alt="Vario 125 Old">
+                <span>Vario 125 Old</span>
             </div>
-            <div class="motor-card" onclick="pilihMotor('vario_baru', this)">
-                <img src="" alt="Vario Baru">
-                <span>Vario (125/160)</span>
+            <div class="motor-card" onclick="pilihMotor('vario_150', this)">
+                <img src="" alt="Vario 150">
+                <span>Vario 150</span>
             </div>
-            <div class="motor-card" onclick="pilihMotor('pcx', this)">
-                <img src="" alt="PCX">
-                <span>Honda PCX</span>
+            <div class="motor-card" onclick="pilihMotor('pcx_150', this)">
+                <img src="" alt="PCX 150">
+                <span>Honda PCX 150</span>
             </div>
-            <div class="motor-card" onclick="pilihMotor('nmax', this)">
-                <img src="" alt="NMAX">
-                <span>Yamaha NMAX</span>
+            <div class="motor-card" onclick="pilihMotor('nmax_155', this)">
+                <img src="" alt="NMAX 155">
+                <span>Yamaha NMAX 155</span>
             </div>
         </div>
-        <!-- Input tersembunyi untuk menyimpan pilihan motor -->
-        <input type="hidden" id="selected-motor" value="beat_lama">
-    </div>
+        <input type="hidden" id="selected-motor" value="beat_karbu">
 
     <div class="form-group">
         <label>Harga 1x Isi Full Tank (Rp)</label>
