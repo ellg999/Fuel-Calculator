@@ -3,366 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fuel Calculator</title>
-    <!-- Kombinasi 3 font simpel selain Poppins -->
+    <title>Fuel Calculator Minimalis</title>
+    <!-- Import Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
-    <style>
-        :root {
-            --primary-blue: #3B82F6;
-            --light-blue: #93C5FD;
-            --neon-blue: #60A5FA;
-            --text-white: #FFFFFF;
-            --text-soft: #E2E8F0;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            /* Latar belakang gradasi biru gelap */
-            background: linear-gradient(135deg, #020617, #1e3a8a, #0f172a);
-            background-size: 200% 200%;
-            animation: gradientBG 15s ease infinite;
-            color: var(--text-white);
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            max-width: 600px;
-            width: 100%;
-            /* Efek Glassmorphism transparan */
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            padding: 40px 30px;
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.05); /* Border sangat transparan */
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        h1 {
-            font-family: 'Outfit', sans-serif;
-            text-align: center;
-            font-size: 28px;
-            margin-top: 0;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-            color: var(--text-white);
-            text-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 10px;
-            color: var(--light-blue);
-            font-weight: 400;
-            letter-spacing: 0.5px;
-        }
-
-        input {
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            /* Input transparan */
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-white);
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 16px;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
-        }
-
-        /* Soft interactive text styling pada input */
-        input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 20px rgba(96, 165, 250, 0.2);
-            color: var(--neon-blue); 
-        }
-
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Kartu Motor Transparan */
-        .motor-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 15px;
-        }
-
-        .motor-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 15px 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .motor-card img {
-            width: 100%;
-            height: 50px;
-            object-fit: contain;
-            margin-bottom: 10px;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        }
-
-        .motor-card span {
-            font-size: 12px;
-            font-weight: 300;
-            color: var(--text-soft);
-            display: block;
-            transition: color 0.3s ease;
-        }
-
-        /* Soft interactive hover & active state */
-        .motor-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(96, 165, 250, 0.3);
-        }
-
-        .motor-card.selected {
-            background: rgba(59, 130, 246, 0.15);
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.2);
-        }
-
-        .motor-card.selected img {
-            opacity: 1;
-            filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.5));
-        }
-
-        .motor-card.selected span {
-            color: var(--neon-blue);
-            font-weight: 500;
-        }
-
-        /* Tombol Kalkulasi Futuristik */
-        button {
-            width: 100%;
-            padding: 18px;
-            margin-top: 10px;
-            border: 1px solid rgba(96, 165, 250, 0.3);
-            border-radius: 14px;
-            background: rgba(59, 130, 246, 0.2);
-            backdrop-filter: blur(5px);
-            color: var(--text-white);
-            font-family: 'Outfit', sans-serif;
-            font-size: 16px;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            background: rgba(59, 130, 246, 0.4);
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        /* Kotak Hasil */
-        .result-box {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 25px;
-            border-radius: 16px;
-            margin-top: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-        }
-
-        .result-box.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-size: 14px;
-            color: var(--text-soft);
-        }
-
-        .result-item span:last-child {
-            font-family: 'Space Grotesk', sans-serif;
-            color: var(--text-white);
-        }
-
-        .total-box {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .total-box span:first-child {
-            font-family: 'Outfit', sans-serif;
-            font-size: 16px;
-            color: var(--light-blue);
-        }
-
-        .total-box span:last-child {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 28px;
-            color: var(--neon-blue);
-            text-shadow: 0 0 20px rgba(96, 165, 250, 0.4);
-        }
-    </style>
+    <!-- Menghubungkan ke file CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-    <h1>FUEL CALCULATOR</h1>
-
-    <div class="form-group">
-        <label>Tujuan Perjalanan</label>
-        <input type="text" id="tujuan" placeholder="Cth: Bandung, Pantai, Kantor...">
-    </div>
+    <h1>Kalkulator BBM</h1>
 
     <div class="form-group">
         <label>Jarak Sekali Jalan (Km)</label>
-        <input type="number" id="jarak" placeholder="Cth: 45">
+        <input type="number" id="jarak" placeholder="Contoh: 60">
     </div>
 
     <div class="form-group">
-        <label>Pilih Kendaraan</label>
+        <label>Pilih Jenis Motor</label>
         <div class="motor-grid">
-            <div class="motor-card selected" onclick="pilihMotor('matic_entry', this)">
-                <!-- GANTI src DI BAWAH DENGAN LINK/PATH FOTO MOTOR MATIC KECIL -->
-                <img src="" alt="Foto Matic Kecil">
-                <span>Matic Kecil</span>
+            <div class="motor-card selected" onclick="pilihMotor('beat_lama', this)">
+                <img src="" alt="Beat Lama">
+                <span>Beat (Lama/Karbu)</span>
             </div>
-            <div class="motor-card" onclick="pilihMotor('matic_maxi', this)">
-                <!-- GANTI src DI BAWAH DENGAN LINK/PATH FOTO MOTOR MATIC BESAR -->
-                <img src="" alt="Foto Matic Besar">
-                <span>Matic Besar</span>
+            <div class="motor-card" onclick="pilihMotor('beat_baru', this)">
+                <img src="" alt="Beat Baru">
+                <span>Beat (Baru/FI)</span>
             </div>
-            <div class="motor-card" onclick="pilihMotor('bebek', this)">
-                <!-- GANTI src DI BAWAH DENGAN LINK/PATH FOTO MOTOR BEBEK -->
-                <img src="" alt="Foto Bebek">
-                <span>Old</span>
+            <div class="motor-card" onclick="pilihMotor('vario_lama', this)">
+                <img src="" alt="Vario Lama">
+                <span>Vario (Lama)</span>
             </div>
-            <div class="motor-card" onclick="pilihMotor('sport', this)">
-                <!-- GANTI src DI BAWAH DENGAN LINK/PATH FOTO MOTOR SPORT -->
-                <img src="" alt="Foto Sport">
-                <span>Sport</span>
+            <div class="motor-card" onclick="pilihMotor('vario_baru', this)">
+                <img src="" alt="Vario Baru">
+                <span>Vario (125/160)</span>
+            </div>
+            <div class="motor-card" onclick="pilihMotor('pcx', this)">
+                <img src="" alt="PCX">
+                <span>Honda PCX</span>
+            </div>
+            <div class="motor-card" onclick="pilihMotor('nmax', this)">
+                <img src="" alt="NMAX">
+                <span>Yamaha NMAX</span>
             </div>
         </div>
-        <input type="hidden" id="selected-motor" value="matic_entry">
+        <!-- Input tersembunyi untuk menyimpan pilihan motor -->
+        <input type="hidden" id="selected-motor" value="beat_lama">
     </div>
 
     <div class="form-group">
-        <label>Harga Bensin Full Tank (Rp)</label>
-        <input type="number" id="harga_fulltank" placeholder="Cth: 45000">
+        <label>Harga 1x Isi Full Tank (Rp)</label>
+        <input type="number" id="harga_fulltank" placeholder="Contoh: 25000">
     </div>
 
-    <button onclick="hitungBensin()">Kalkulasi Bahan Bakar</button>
+    <button onclick="hitungBensin()">Cetak Estimasi</button>
 
-    <div class="result-box" id="result-box">
-        <div class="result-item">
-            <span>Estimasi Jarak (Pergi-Pulang):</span>
-            <span id="res-jarak">0 Km</span>
-        </div>
-        <div class="result-item">
-            <span>Kebutuhan Bensin:</span>
-            <span id="res-liter">0 Liter</span>
-        </div>
-        <div class="result-item">
-            <span>Perkiraan Isi Bensin:</span>
-            <span id="res-refill">0x Full Tank</span>
+    <!-- Hasil Berupa Struk (Receipt) -->
+    <div class="receipt-box" id="receipt-box">
+        <div class="receipt-header">
+            <h2>STRUK ESTIMASI BBM</h2>
+            <p>Perjalanan Pulang - Pergi</p>
         </div>
         
-        <div class="total-box">
-            <span>TOTAL BIAYA BBM (PP)</span>
-            <span id="res-total">Rp 0</span>
+        <div class="receipt-item">
+            <span>Jarak Tempuh (PP)</span>
+            <span id="res-jarak">-</span>
+        </div>
+        <div class="receipt-item">
+            <span>Estimasi Terbakar</span>
+            <span id="res-bakar">-</span>
+        </div>
+        <div class="receipt-item">
+            <span>Frekuensi Isi Bensin</span>
+            <span id="res-frekuensi">-</span>
+        </div>
+        
+        <div class="receipt-total">
+            <div class="main-total">
+                <span>UANG DISIAPKAN</span>
+                <span id="res-total">-</span>
+            </div>
+            <div class="receipt-item" style="color: var(--accent-blue);">
+                <span>(Total BBM Didapat)</span>
+                <span id="res-total-liter">-</span>
+            </div>
+        </div>
+        
+        <div class="receipt-note">
+            "Sistem menyarankan isi full tank agar aman di perjalanan."
         </div>
     </div>
 </div>
 
-<script>
-    function pilihMotor(tipe, element) {
-        document.getElementById('selected-motor').value = tipe;
-        
-        const cards = document.querySelectorAll('.motor-card');
-        cards.forEach(card => card.classList.remove('selected'));
-        
-        element.classList.add('selected');
-    }
-
-    // Database Efisiensi Motor (Km per Liter)
-    const motorDB = {
-        matic_entry: { konsumsi: 52 }, 
-        matic_maxi:  { konsumsi: 40 }, 
-        bebek:       { konsumsi: 58 }, 
-        sport:       { konsumsi: 38 }  
-    };
-
-    const hargaPerLiter = 10000; // Asumsi Pertalite/Bensin standar
-
-    function hitungBensin() {
-        const jarakSekaliJalan = parseFloat(document.getElementById('jarak').value) || 0;
-        const tipeMotor = document.getElementById('selected-motor').value;
-        const hargaFullTank = parseFloat(document.getElementById('harga_fulltank').value) || 0;
-
-        const jarakPP = jarakSekaliJalan * 2;
-        const spekMotor = motorDB[tipeMotor];
-        
-        // Menentukan kapasitas tangki pengguna
-        const kapasitasTangki = hargaFullTank / hargaPerLiter;
-        
-        // Kebutuhan liter bensin
-        const literDibutuhkan = jarakPP / spekMotor.konsumsi;
-        
-        // Total Harga
-        const totalBiayaBensin = Math.ceil(literDibutuhkan * hargaPerLiter);
-        
-        // Berapa kali isi full tank
-        let kaliIsi = kapasitasTangki > 0 ? (literDibutuhkan / kapasitasTangki) : 0;
-        kaliIsi = Math.max(0.1, kaliIsi).toFixed(1);
-
-        // Menampilkan ke layar
-        document.getElementById('res-jarak').innerText = `${jarakPP} Km`;
-        document.getElementById('res-liter').innerText = `${literDibutuhkan.toFixed(1)} Liter`;
-        document.getElementById('res-refill').innerText = `~ ${kaliIsi}x Full Tank`;
-        
-        // Format Rupiah
-        const formatRupiah = new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 0
-        }).format(totalBiayaBensin);
-        
-        document.getElementById('res-total').innerText = formatRupiah;
-
-        // Tampilkan kotak hasil dengan animasi
-        document.getElementById('result-box').classList.add('show');
-    }
-</script>
+<!-- Menghubungkan ke file JavaScript -->
+<script src="script.js"></script>
 
 </body>
 </html>
