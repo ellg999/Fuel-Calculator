@@ -70,7 +70,6 @@ input:focus, select:focus {
     box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
 }
 
-/* Tambahan khusus select agar teks pilihannya tidak transparan saat diklik */
 select option {
     background-color: var(--bg-black);
     color: var(--text-white);
@@ -141,10 +140,6 @@ button:hover {
     color: white;
     transform: translateY(-2px);
 }
-
-/* ================================
-   ANIMASI PRINT STRUK KASIR
-   ================================ */
 
 /* Struk awalnya disembunyikan */
 .receipt-box {
@@ -247,16 +242,20 @@ button:hover {
     font-family: 'Space Grotesk', monospace;
     color: var(--text-white);
 }
-
 .receipt-note {
     text-align: center;
     font-size: 11px;
     color: var(--text-muted);
-    margin-top: 20px;
+    margin-top: 25px; /* Jarak Note dari kotak Total di atasnya */
+    margin-bottom: 20px; /* Jarak Note ke tombol Hitung Ulang di bawahnya */
     font-style: italic;
+    line-height: 1.4; /* Merapatkan spasi antar baris */
 }
 
-/* Tombol Hitung Ulang transparan */
+/* Mengatur agar kalimat 1 dan kalimat 2 saling berdekatan */
+.receipt-note p {
+    margin: 4px 0; /* Angka 4px ini mengatur seberapa dekat jarak antar kalimat, semakin kecil semakin dekat */
+}
 .btn-kembali {
     background: transparent;
     border: 1px solid var(--text-muted);
