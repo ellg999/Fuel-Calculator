@@ -21,12 +21,12 @@ body {
 .container {
     max-width: 550px;
     width: 100%;
-    /* Efek transparan yang menyatu dengan hitam */
     background: var(--container-bg);
     padding: 30px;
     border-radius: 20px;
     border: 1px solid var(--border-light);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    overflow: hidden; /* Penting untuk efek print */
 }
 
 h1 {
@@ -122,8 +122,8 @@ button {
     margin-top: 15px;
     border: none;
     border-radius: 12px;
-    background: var(--text-white); /* Tombol putih */
-    color: var(--bg-black); /* Teks tombol hitam */
+    background: var(--text-white); 
+    color: var(--bg-black); 
     font-family: 'Outfit', sans-serif;
     font-size: 15px;
     font-weight: 600;
@@ -137,16 +137,41 @@ button:hover {
     transform: translateY(-2px);
 }
 
-/* Desain ala Struk (Receipt) versi Dark Mode */
+/* ================================
+   ANIMASI PRINT STRUK KASIR
+   ================================ */
+
+/* Struk awalnya disembunyikan */
 .receipt-box {
-    background: #111111; /* Warna struk abu-abu sangat gelap */
+    background: #111111; 
     padding: 25px;
-    margin-top: 35px;
     border: 1px solid var(--border-light);
     border-radius: 4px; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    display: none;
+    display: none; 
     position: relative;
+    overflow: hidden; 
+}
+
+/* Ini adalah kelas yang dipanggil JS untuk efek nge-print */
+.receipt-box.printing {
+    display: block;
+    animation: cetakStruk 1.5s ease-out forwards; /* Efek keluar lambat seperti printer */
+}
+
+@keyframes cetakStruk {
+    0% {
+        max-height: 0px;
+        opacity: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    100% {
+        max-height: 800px;
+        opacity: 1;
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
 }
 
 .receipt-box::before, .receipt-box::after {
@@ -224,4 +249,16 @@ button:hover {
     color: var(--text-muted);
     margin-top: 20px;
     font-style: italic;
+}
+
+/* Tombol Hitung Ulang transparan */
+.btn-kembali {
+    background: transparent;
+    border: 1px solid var(--text-muted);
+    color: var(--text-muted);
+    margin-top: 25px;
+}
+.btn-kembali:hover {
+    background: var(--text-muted);
+    color: var(--bg-black);
 }
