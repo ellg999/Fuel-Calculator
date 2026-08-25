@@ -4,78 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fuel Calculator</title>
-    
-    <!-- preview link-->
-    <meta property="og:title" content="Kalkulator BBM Minimalis">
-    <meta property="og:description" content="Hitung estimasi pengeluaran bensin untuk perjalananmu dengan mudah dan akurat!">
-    <meta property="og:image" content="Foto/preview.png"> 
 
-    <link href="https://fonts.googleapis.com/css2?..." rel="stylesheet">
+    <meta property="og:title" content="Kalkulator BBM">
+    <meta property="og:description" content="Hitung estimasi pengeluaran bensin untuk perjalananmu dengan mudah dan akurat!">
+    <meta property="og:image" content="preview.png"> 
+
+    <!-- Font yang diperbarui untuk tampilan lebih lembut dan modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
     
-    <!-- BAGIAN FORM (Akan disembunyikan saat struk keluar) -->
+    <!-- BAGIAN FORM -->
     <div id="form-section">
         <h1>Kalkulator BBM</h1>
 
         <div class="form-group">
             <label>Jarak Sekali Jalan (Km)</label>
-            <input type="number" id="jarak" placeholder="Contoh: 60">
+            <div class="input-with-icon">
+                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
+                <input type="number" id="jarak" placeholder="Contoh: 60" inputmode="numeric">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Pilih Jenis Bensin</label>
+            <div class="input-with-icon">
+                <!-- Ikon Pompa Bensin -->
+                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22v-8p2 2-2 2h4a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h4"></path><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"></path><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"></path></svg></span>
+                <select id="jenis_bensin">
+                    <option value="10000">Pertalite (RON 90) - Rp 10.000 / Liter</option>
+                    <option value="18300">Pertamax Turbo (RON 98) - Rp 18.300 / Liter</option>
+                </select>
+            </div>
         </div>
 
         <div class="form-group">
             <label>Pilih Jenis Motor</label>
             <div class="motor-grid">
                 <div class="motor-card selected" onclick="pilihMotor('beat_karbu', this)">
-                    <img src="Foto/beat karbu.png" alt="Beat Karbu">
+                    <img src="beat karbu.png" alt="Beat Karbu">
                     <span>Beat Karbu (08-12)</span>
                 </div>
                 <div class="motor-card" onclick="pilihMotor('beat_deluxe', this)">
-                    <img src="Foto/beat new.png" alt="Beat Deluxe">
+                    <img src="beat new.png" alt="Beat Deluxe">
                     <span>Beat Deluxe ISS</span>
                 </div>
                 <div class="motor-card" onclick="pilihMotor('vario_125_old', this)">
-                    <img src="Foto/vario 125.png" alt="Vario 125 Old">
+                    <img src="vario 2015.png" alt="Vario 125 Old">
                     <span>Vario 125</span>
                 </div>
                 <div class="motor-card" onclick="pilihMotor('vario_150', this)">
-                    <img src="Foto/vario 150.png" alt="Vario 150">
+                    <img src="vario 150.png" alt="Vario 150">
                     <span>Vario 150</span>
                 </div>
                 <div class="motor-card" onclick="pilihMotor('pcx_150', this)">
-                    <img src="Foto/pcx 150.png" alt="PCX 150">
+                    <img src="pcx 150.png" alt="PCX 150">
                     <span>Honda PCX 150</span>
                 </div>
                 <div class="motor-card" onclick="pilihMotor('nmax_155', this)">
-                    <img src="Foto/nmax 150.png" alt="NMAX 155">
+                    <img src="nmax 150.png" alt="NMAX 155">
                     <span>Yamaha NMAX 155</span>
                 </div>
+            </div>
+            <input type="hidden" id="selected-motor" value="beat_karbu">
         </div>
-        <input type="hidden" id="selected-motor" value="beat_karbu">
+
+        <div class="form-group">
+            <label>Harga 1x Isi Full Tank (Rp)</label>
+            <div class="input-with-icon">
+                <!-- Ikon Dompet Uang -->
+                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg></span>
+                <input type="number" id="harga_fulltank" placeholder="Contoh: 25000" inputmode="numeric">
+            </div>
+        </div>
+
+        <button class="btn-cetak" onclick="hitungBensin()">Cetak Estimasi</button>
     </div>
 
-    <div class="form-group">
-        <label>Pilih Jenis Bensin</label>
-        <select id="jenis_bensin">
-            <option value="10000">Pertalite (RON 90) - Rp 10.000 / Liter</option>
-            <option value="18300">Pertamax Turbo (RON 98) - Rp 18.300 / Liter</option>
-        </select>
-    </div>
-    
-    <div class="form-group">
-        <label>Harga 1x Isi Full Tank (Rp)</label>
-        <input type="number" id="harga_fulltank" placeholder="Contoh: 25000">
-    </div>
-        <button onclick="hitungBensin()">Cetak Estimasi</button>
-    </div>
-
-    <!--animasi struk-->
+    <!-- BAGIAN STRUK KASIR FISIK -->
     <div class="receipt-box" id="receipt-box">
         <div class="receipt-header">
-            <h2>STRUK PERKIRAAN ESTIMASI BBM</h2>
+            <h2>STRUK ESTIMASI BBM</h2>
             <p>Perjalanan Pulang - Pergi</p>
         </div>
         
@@ -84,7 +96,7 @@
             <span id="res-jarak">-</span>
         </div>
         <div class="receipt-item">
-            <span>Perkiraan Jumlah Bensin Yang Terpakai (Liter)</span>
+            <span>Estimasi Bensin Yang Terpakai</span>
             <span id="res-bakar">-</span>
         </div>
         <div class="receipt-item">
@@ -98,16 +110,22 @@
                 <span id="res-total">-</span>
             </div>
             <div class="receipt-item" style="color: var(--accent-blue);">
-                <span>(Total BBM Yang Didapatkan)</span>
+                <span>(Jumlah BBM Yang Didapat)</span>
                 <span id="res-total-liter">-</span>
             </div>
         </div>
-         <div class="receipt-note">
-            <p>*Total yang tertera adalah harga isi Full Tank.</p>
-            <p>*Total yang tertera adalah hasil PERKIRAAN, jadi memiliki kemungkinan benar dan salah</p>
-         </div>
         
-        <!-- Tombol untuk kembali ke pengisian awal -->
+        <div class="receipt-note">
+            <p>*Total yang tertera adalah harga isi Full Tank.</p>
+            <p>*Total yang tertera adalah hasil PERKIRAAN, jadi memiliki kemungkinan benar dan salah.</p>
+        </div>
+
+        <!-- Fake Barcode -->
+        <div class="barcode-section">
+            <div class="barcode"></div>
+            <p>TID: 8940-0294-118</p>
+        </div>
+
         <button class="btn-kembali" onclick="hitungUlang()">Hitung Ulang</button>
     </div>
 </div>
