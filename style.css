@@ -50,7 +50,7 @@ label {
     font-weight: 500;
 }
 
-input {
+input, select {
     width: 100%;
     padding: 14px;
     border-radius: 12px;
@@ -63,13 +63,18 @@ input {
     transition: all 0.3s ease;
 }
 
-input:focus {
+input:focus, select:focus {
     outline: none;
     border-color: var(--accent-blue);
     background: rgba(59, 130, 246, 0.05);
     box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
 }
 
+/* Tambahan khusus select agar teks pilihannya tidak transparan saat diklik */
+select option {
+    background-color: var(--bg-black);
+    color: var(--text-white);
+}
 .motor-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
