@@ -2,131 +2,132 @@
     --bg-black: #000000; 
     --text-white: #FFFFFF; 
     --text-muted: #94A3B8; 
-    --accent-blue: #1D4ED8;
+    --accent-blue: #3B82F6; 
     --border-light: rgba(255, 255, 255, 0.15); 
     --container-bg: rgba(255, 255, 255, 0.03); 
     
-    /* Palet Warna Kertas Struk */
     --receipt-bg: #F8FAFC;
     --receipt-text: #0F172A;
     --receipt-muted: #64748B;
     --receipt-border: rgba(0, 0, 0, 0.15);
 }
 
+/* Reset wajib agar ukuran elemen di HP presisi */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--bg-black);
     color: var(--text-white);
-    margin: 0;
-    padding: 40px 20px;
+    padding: 20px 12px;
     display: flex;
     justify-content: center;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .container {
-    max-width: 550px;
     width: 100%;
+    max-width: 480px;
     background: var(--container-bg);
-    padding: 30px;
-    border-radius: 20px;
+    padding: 24px 16px;
+    border-radius: 16px;
     border: 1px solid var(--border-light);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    overflow: hidden; 
     height: fit-content;
 }
 
 h1 {
     font-weight: 600;
     text-align: center;
-    font-size: 26px;
-    margin-top: 0;
-    margin-bottom: 30px;
+    font-size: 22px;
+    margin-bottom: 24px;
     color: var(--text-white);
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    width: 100%;
 }
 
 label {
     display: block;
     font-size: 13px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     color: var(--text-muted);
     font-weight: 500;
 }
 
-/* Micro-Interaction: Input dengan Ikon */
 .input-with-icon {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .input-with-icon .icon {
     position: absolute;
-    left: 16px;
+    left: 14px;
     color: var(--text-muted);
     display: flex;
-    transition: color 0.3s ease;
+    pointer-events: none;
 }
 
 input, select {
     width: 100%;
-    padding: 14px 14px 14px 45px; /* Spasi kiri 45px untuk tempat ikon */
-    border-radius: 12px;
+    padding: 12px 12px 12px 42px;
+    border-radius: 10px;
     background: transparent;
     border: 1px solid var(--border-light);
     color: var(--text-white);
     font-family: 'Space Grotesk', monospace;
-    font-size: 16px;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
+    font-size: 15px;
+    transition: all 0.2s ease;
 }
 
 select option {
-    background-color: var(--bg-black);
+    background-color: #111111;
     color: var(--text-white);
 }
 
 input:focus, select:focus {
     outline: none;
     border-color: var(--accent-blue);
-    background: rgba(29, 78, 216, 0.05);
-    box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.15);
+    background: rgba(59, 130, 246, 0.05);
 }
 
-/* Membuat ikon menyala saat kolom diklik */
-input:focus + .icon, select:focus + .icon, 
 .input-with-icon:focus-within .icon {
     color: var(--accent-blue);
 }
 
-/* Grid & Kartu Motor */
+/* Grid Motor */
 .motor-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    width: 100%;
 }
 
 .motor-card {
-    position: relative; /* Penting untuk posisi centang */
+    position: relative;
     background: transparent;
     border: 1px solid var(--border-light);
-    border-radius: 12px;
-    padding: 12px 5px;
+    border-radius: 10px;
+    padding: 10px 4px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .motor-card img {
     width: 100%;
-    height: 45px;
+    height: 40px;
     object-fit: contain;
-    margin-bottom: 5px;
-    opacity: 0.8;
+    margin-bottom: 4px;
 }
 
 .motor-card span {
@@ -136,13 +137,8 @@ input:focus + .icon, select:focus + .icon,
     display: block;
 }
 
-.motor-card:hover {
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.02);
-}
-
 .motor-card.selected {
-    background: rgba(29, 78, 216, 0.1);
+    background: rgba(59, 130, 246, 0.1);
     border-color: var(--accent-blue);
 }
 
@@ -151,82 +147,73 @@ input:focus + .icon, select:focus + .icon,
     font-weight: 600;
 }
 
-/* Ikon Centang (Checkmark) Otomatis via CSS */
 .motor-card.selected::after {
     content: "✓";
     position: absolute;
-    top: -6px;
-    right: -6px;
+    top: -5px;
+    right: -5px;
     background: var(--accent-blue);
     color: white;
-    font-size: 10px;
-    width: 18px;
-    height: 18px;
+    font-size: 9px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
-/* Tombol Utama (Efek Glow Gradasi) */
 .btn-cetak {
     width: 100%;
-    padding: 16px;
-    margin-top: 15px;
+    padding: 14px;
+    margin-top: 10px;
     border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #1E3A8A, #3B82F6);
-    color: white; 
+    border-radius: 10px;
+    background: #2563EB;
+    color: white;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(29, 78, 216, 0.2);
 }
 
-.btn-cetak:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5); /* Efek cahaya keluar */
-}
-
-/* ================================
-   ANIMASI STRUK KERTAS FISIK
-   ================================ */
-
+/* Struk Kasir */
 .receipt-box {
-    background: var(--receipt-bg); 
-    padding: 25px;
-    border-radius: 4px; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-    display: none; 
+    background: var(--receipt-bg);
+    padding: 20px 16px;
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    display: none;
     position: relative;
-    overflow: hidden; 
-    color: var(--receipt-text); /* Teks struk jadi gelap */
+    color: var(--receipt-text);
+    width: 100%;
 }
 
 .receipt-box.printing {
     display: block;
-    animation: cetakStruk 1.5s ease-out forwards; 
+    animation: cetakStruk 1s ease-out forwards;
 }
 
 @keyframes cetakStruk {
     0% { max-height: 0px; opacity: 0; padding-top: 0; padding-bottom: 0; }
-    100% { max-height: 850px; opacity: 1; padding-top: 25px; padding-bottom: 25px; }
+    100% { max-height: 1000px; opacity: 1; padding-top: 20px; padding-bottom: 20px; }
 }
 
 .receipt-box::before, .receipt-box::after {
     content: "";
     position: absolute;
-    left: 0; right: 0; height: 6px;
+    left: 0;
+    right: 0;
+    height: 6px;
     background-size: 12px 100%;
 }
+
 .receipt-box::before {
     top: -6px;
     background-image: radial-gradient(circle at 6px 0, transparent 6px, var(--receipt-bg) 7px);
 }
+
 .receipt-box::after {
     bottom: -6px;
     background-image: radial-gradient(circle at 6px 6px, transparent 6px, var(--receipt-bg) 7px);
@@ -235,29 +222,27 @@ input:focus + .icon, select:focus + .icon,
 .receipt-header {
     text-align: center;
     font-family: 'Space Grotesk', monospace;
-    border-bottom: 2px dashed var(--receipt-border);
-    padding-bottom: 15px;
-    margin-bottom: 15px;
+    border-bottom: 1px dashed var(--receipt-border);
+    padding-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .receipt-header h2 {
-    margin: 0;
-    font-size: 16px;
-    letter-spacing: 2px;
-    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1px;
 }
 
 .receipt-header p {
-    margin: 5px 0 0;
     font-size: 11px;
     color: var(--receipt-muted);
+    margin-top: 4px;
 }
 
 .receipt-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12px;
-    font-size: 13px;
+    margin-bottom: 10px;
+    font-size: 12px;
     font-family: 'Space Grotesk', monospace;
 }
 
@@ -266,96 +251,82 @@ input:focus + .icon, select:focus + .icon,
 }
 
 .receipt-total {
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 2px dashed var(--receipt-border);
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--receipt-border);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .receipt-total .main-total {
     display: flex;
     justify-content: space-between;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     font-family: 'Space Grotesk', monospace;
 }
 
 .receipt-note {
     text-align: center;
-    font-size: 11px;
+    font-size: 10px;
     color: var(--receipt-muted);
-    margin-top: 25px; 
-    margin-bottom: 25px; 
+    margin: 16px 0;
     font-style: italic;
-    line-height: 1.4; 
+    line-height: 1.3;
 }
 
 .receipt-note p {
-    margin: 4px 0; 
+    margin: 2px 0;
 }
 
-/* Efek Barcode Menggunakan CSS murni (Tanpa Gambar Tambahan) */
 .barcode-section {
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .barcode {
-    width: 160px;
-    height: 40px;
+    width: 140px;
+    height: 32px;
     background-image: repeating-linear-gradient(
         to right,
         var(--receipt-text) 0, var(--receipt-text) 2px,
         transparent 2px, transparent 4px,
         var(--receipt-text) 4px, var(--receipt-text) 5px,
         transparent 5px, transparent 8px,
-        var(--receipt-text) 8px, var(--receipt-text) 12px,
-        transparent 12px, transparent 14px
+        var(--receipt-text) 8px, var(--receipt-text) 11px,
+        transparent 11px, transparent 13px
     );
     opacity: 0.8;
 }
 
 .barcode-section p {
     font-family: 'Space Grotesk', monospace;
-    font-size: 10px;
+    font-size: 9px;
     color: var(--receipt-muted);
-    margin-top: 8px;
-    letter-spacing: 2px;
+    margin-top: 6px;
+    letter-spacing: 1px;
 }
 
-/* Tombol Kembali khusus Struk */
 .btn-kembali {
     width: 100%;
-    padding: 14px;
+    padding: 12px;
     background: transparent;
     border: 1px solid var(--receipt-muted);
     border-radius: 8px;
     color: var(--receipt-text);
     font-family: 'Poppins', sans-serif;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
 }
 
-.btn-kembali:hover {
-    background: #E2E8F0; /* Abu-abu terang saat di-hover */
-}
-
-/* ================================
-   RESPONSIVE LAYOUT UNTUK LAYAR HP
-   ================================ */
-@media (max-width: 480px) {
+/* Penyesuaian layar laptop/desktop */
+@media (min-width: 500px) {
     .motor-grid {
-        /* Ubah jadi 2 kolom di HP agar gambar tidak gepeng */
-        grid-template-columns: repeat(2, 1fr); 
+        grid-template-columns: repeat(3, 1fr);
     }
-    
-    .container {
-        padding: 20px 15px;
     }
-}
