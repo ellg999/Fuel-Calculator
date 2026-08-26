@@ -22,15 +22,31 @@ function formatRp(angka) {
         currency: 'IDR', 
         minimumFractionDigits: 0 
     }).format(angka);
-}
-
 function hitungBensin() {
-    // 1. Ambil Data
-    const jarakSekaliJalan = parseFloat(document.getElementById('jarak').value) || 0;
-    const tipeMotor = document.getElementById('selected-motor').value;
-    const hargaFullTank = parseFloat(document.getElementById('harga_fulltank').value) || 0;
+    // 1. Ambil Data Teks Asli
+    const inputJarak = document.getElementById('jarak').value;
+    const inputHarga = document.getElementById('harga_fulltank').value;
 
-    // 2. Hitung Matematika
+    // 2. CEK KOSONG: Hentikan kalau ada yang belum diisi
+    if (inputJarak === "" || inputHarga === "") {
+        alert("Eh, isi dulu Jarak dan Harga Full Tank-nya ya!");
+        return; // Tombol berhenti bekerja di sini
+    }
+
+    // 3. Ubah teks menjadi angka desimal
+    const jarakSekaliJalan = parseFloat(inputJarak);
+    const hargaFullTank = parseFloat(inputHarga);
+    
+    // 4. CEK MINUS/NOL: Hentikan kalau angkanya nggak masuk akal
+    if (jarakSekaliJalan <= 0 || hargaFullTank <= 0) {
+        alert("Jarak dan Harga nggak boleh nol atau minus dong!");
+        return; // Tombol berhenti bekerja di sini
+    }
+
+    // 5. Lanjut Hitung Matematika (Kalau lolos cek di atas)
+    const tipeMotor = document.getElementById('selected-motor').value;
+    const hargaPerLiter = parseFloat(document.getElementById('jenis_bensin').value);
+
     const jarakPP = jarakSekaliJalan * 2;
     const spekMotor = motorDB[tipeMotor];
     const kapasitasTangki = hargaFullTank / hargaPerLiter;
@@ -40,26 +56,21 @@ function hitungBensin() {
     const uangKeluar = kaliMampirPom * hargaFullTank;
     const totalLiterDidapat = kaliMampirPom * kapasitasTangki;
 
-    // 3. Masukkan Angka ke Struk
+    // 6. Masukkan Angka ke Struk
     document.getElementById('res-jarak').innerText = `${jarakPP} Km`;
     document.getElementById('res-bakar').innerText = `${literDibutuhkan.toFixed(1)} Liter`;
     document.getElementById('res-frekuensi').innerText = `${kaliMampirPom}x Full Tank`;
     document.getElementById('res-total').innerText = formatRp(uangKeluar);
     document.getElementById('res-total-liter').innerText = `${totalLiterDidapat.toFixed(1)} Liter`;
 
-    // 4. MENGHILANGKAN FORM & MEMUNCULKAN STRUK
-    document.getElementById('form-section').style.display = 'none'; // Form menghilang
-    
+    // 7. Animasi Struk Keluar
+    document.getElementById('form-section').style.display = 'none';
     const receiptBox = document.getElementById('receipt-box');
     receiptBox.classList.remove('printing');
-    
-    // Trik kecil untuk me-reset animasi agar bisa diulang
     void receiptBox.offsetWidth; 
-    
-    // Tambahkan class printing untuk memicu animasi keluar seperti kertas
     receiptBox.classList.add('printing');
 }
-
+    
 // Fungsi jika tombol "Hitung Ulang" ditekan
 function hitungUlang() {
     // Sembunyikan struk dan hilangkan animasinya
