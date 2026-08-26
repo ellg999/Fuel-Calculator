@@ -329,4 +329,4 @@ input:focus, select:focus {
     .motor-grid {
         grid-template-columns: repeat(3, 1fr);
     }
-    }
+}
