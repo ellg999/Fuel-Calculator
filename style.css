@@ -12,7 +12,6 @@
     --receipt-border: rgba(0, 0, 0, 0.15);
 }
 
-/* Reset wajib agar ukuran elemen di HP presisi */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -104,7 +103,6 @@ input:focus, select:focus {
     color: var(--accent-blue);
 }
 
-/* Grid Motor */
 .motor-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -178,7 +176,6 @@ input:focus, select:focus {
     cursor: pointer;
 }
 
-/* Struk Kasir */
 .receipt-box {
     background: var(--receipt-bg);
     padding: 20px 16px;
@@ -188,11 +185,12 @@ input:focus, select:focus {
     position: relative;
     color: var(--receipt-text);
     width: 100%;
+    overflow: hidden;
 }
 
 .receipt-box.printing {
     display: block;
-    animation: cetakStruk 1s ease-out forwards;
+    animation: cetakStruk 1.5s ease-out forwards;
 }
 
 @keyframes cetakStruk {
@@ -324,7 +322,6 @@ input:focus, select:focus {
     cursor: pointer;
 }
 
-/* Penyesuaian layar laptop/desktop */
 @media (min-width: 500px) {
     .motor-grid {
         grid-template-columns: repeat(3, 1fr);
