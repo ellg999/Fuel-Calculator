@@ -1,10 +1,4 @@
-function pilihMotor(tipe, element) {
-    document.getElementById('selected-motor').value = tipe;
-    const cards = document.querySelectorAll('.motor-card');
-    cards.forEach(card => card.classList.remove('selected'));
-    element.classList.add('selected');
-}
-
+// 1. Database Konsumsi Motor (Realita Jalanan)
 const motorDB = {
     beat_karbu:    { konsumsi: 35 }, 
     beat_deluxe:   { konsumsi: 58 }, 
@@ -14,70 +8,81 @@ const motorDB = {
     nmax_155:      { konsumsi: 38 }  
 };
 
-const hargaPerLiter = 10000; 
+// 2. Fungsi Animasi Pilih Motor di Grid
+function pilihMotor(tipe, element) {
+    document.getElementById('selected-motor').value = tipe;
+    const cards = document.querySelectorAll('.motor-card');
+    cards.forEach(card => card.classList.remove('selected'));
+    element.classList.add('selected');
+}
 
+// 3. Fungsi Pengubah Angka Jadi Format Rupiah
 function formatRp(angka) {
     return new Intl.NumberFormat('id-ID', { 
         style: 'currency', 
         currency: 'IDR', 
         minimumFractionDigits: 0 
     }).format(angka);
+}
+
+// 4. OTAK UTAMA: Fungsi Hitung Bensin
 function hitungBensin() {
-    // 1. Ambil Data Teks Asli
+    // Ambil input dari user
     const inputJarak = document.getElementById('jarak').value;
     const inputHarga = document.getElementById('harga_fulltank').value;
 
-    // 2. CEK KOSONG: Hentikan kalau ada yang belum diisi
+    // VALIDASI 1: Cek apakah kolom masih kosong
     if (inputJarak === "" || inputHarga === "") {
         alert("Eh, isi dulu Jarak dan Harga Full Tank-nya ya!");
-        return; // Tombol berhenti bekerja di sini
+        return; // Hentikan proses hitung di sini
     }
 
-    // 3. Ubah teks menjadi angka desimal
+    // Ubah teks yang diketik menjadi angka desimal
     const jarakSekaliJalan = parseFloat(inputJarak);
     const hargaFullTank = parseFloat(inputHarga);
     
-    // 4. CEK MINUS/NOL: Hentikan kalau angkanya nggak masuk akal
+    // VALIDASI 2: Cek apakah user iseng masukin angka minus atau nol
     if (jarakSekaliJalan <= 0 || hargaFullTank <= 0) {
         alert("Jarak dan Harga nggak boleh nol atau minus dong!");
-        return; // Tombol berhenti bekerja di sini
+        return; // Hentikan proses hitung di sini
     }
 
-    // 5. Lanjut Hitung Matematika (Kalau lolos cek di atas)
+    // Ambil data pilihan motor dan jenis bensin
     const tipeMotor = document.getElementById('selected-motor').value;
     const hargaPerLiter = parseFloat(document.getElementById('jenis_bensin').value);
 
+    // Proses Kalkulasi Matematika
     const jarakPP = jarakSekaliJalan * 2;
     const spekMotor = motorDB[tipeMotor];
     const kapasitasTangki = hargaFullTank / hargaPerLiter;
     const literDibutuhkan = jarakPP / spekMotor.konsumsi;
     
+    // Pembulatan ke atas (Math.ceil)
     let kaliMampirPom = kapasitasTangki > 0 ? Math.ceil(literDibutuhkan / kapasitasTangki) : 0;
     const uangKeluar = kaliMampirPom * hargaFullTank;
     const totalLiterDidapat = kaliMampirPom * kapasitasTangki;
 
-    // 6. Masukkan Angka ke Struk
+    // Suntikkan hasil hitungan ke dalam struk kasir HTML
     document.getElementById('res-jarak').innerText = `${jarakPP} Km`;
     document.getElementById('res-bakar').innerText = `${literDibutuhkan.toFixed(1)} Liter`;
     document.getElementById('res-frekuensi').innerText = `${kaliMampirPom}x Full Tank`;
     document.getElementById('res-total').innerText = formatRp(uangKeluar);
     document.getElementById('res-total-liter').innerText = `${totalLiterDidapat.toFixed(1)} Liter`;
 
-    // 7. Animasi Struk Keluar
+    // Sembunyikan form dan munculkan animasi print struk
     document.getElementById('form-section').style.display = 'none';
     const receiptBox = document.getElementById('receipt-box');
+    
+    // Trik mereset animasi
     receiptBox.classList.remove('printing');
     void receiptBox.offsetWidth; 
     receiptBox.classList.add('printing');
 }
-    
-// Fungsi jika tombol "Hitung Ulang" ditekan
+
+// 5. Fungsi Tombol Hitung Ulang
 function hitungUlang() {
-    // Sembunyikan struk dan hilangkan animasinya
     const receiptBox = document.getElementById('receipt-box');
     receiptBox.classList.remove('printing');
     receiptBox.style.display = 'none';
-
-    // Munculkan kembali form pengisian awal
     document.getElementById('form-section').style.display = 'block';
 }
