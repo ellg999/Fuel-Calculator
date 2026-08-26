@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fuel Calculator</title>
-
+    
+    <!-- Open Graph untuk Preview Link WhatsApp/Sosmed -->
     <meta property="og:title" content="Kalkulator BBM">
     <meta property="og:description" content="Hitung estimasi pengeluaran bensin untuk perjalananmu dengan mudah dan akurat!">
-    <meta property="og:image" content="Foto/preview.png"> 
+    <meta property="og:image" content="preview.jpg"> 
 
+    <!-- Font yang diperbarui untuk tampilan lebih lembut dan modern -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,8 +25,11 @@
         <div class="form-group">
             <label>Jarak Sekali Jalan (Km)</label>
             <div class="input-with-icon">
+                <!-- Ikon Pin Lokasi -->
                 <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
-                <input type="number" id="jarak" placeholder="Contoh: 60" inputmode="numeric">
+                
+                <!-- Tambahan min="1" ada di sini -->
+                <input type="number" id="jarak" placeholder="Contoh: 60" inputmode="numeric" min="1">
             </div>
         </div>
 
@@ -44,27 +49,27 @@
             <label>Pilih Jenis Motor</label>
             <div class="motor-grid">
                 <div class="motor-card selected" onclick="pilihMotor('beat_karbu', this)">
-                    <img src="Foto/beat karbu.png" alt="Beat Karbu">
+                    <img src="beat-karbu.png" alt="Beat Karbu">
                     <span>Beat Karbu (08-12)</span>
                 </div>
                 <div class="motor-card" onclick="pilihMotor('beat_deluxe', this)">
-                    <img src="Foto/beat new.png" alt="Beat Deluxe">
+                    <img src="beat-deluxe.jpg" alt="Beat Deluxe">
                     <span>Beat Deluxe ISS</span>
                 </div>
                 <div class="motor-card" onclick="pilihMotor('vario_125_old', this)">
-                    <img src="Foto/vario 125.png" alt="Vario 125 Old">
-                    <span>Vario 125</span>
+                    <img src="vario-old.png" alt="Vario 125 Old">
+                    <span>Vario 125 Old</span>
                 </div>
                 <div class="motor-card" onclick="pilihMotor('vario_150', this)">
-                    <img src="Foto/vario 150.png" alt="Vario 150">
+                    <img src="vario-150.jpg" alt="Vario 150">
                     <span>Vario 150</span>
                 </div>
                 <div class="motor-card" onclick="pilihMotor('pcx_150', this)">
-                    <img src="Foto/pcx 150.png" alt="PCX 150">
+                    <img src="pcx.png" alt="PCX 150">
                     <span>Honda PCX 150</span>
                 </div>
                 <div class="motor-card" onclick="pilihMotor('nmax_155', this)">
-                    <img src="Foto/nmax 150.png" alt="NMAX 155">
+                    <img src="nmax.jpg" alt="NMAX 155">
                     <span>Yamaha NMAX 155</span>
                 </div>
             </div>
@@ -76,7 +81,9 @@
             <div class="input-with-icon">
                 <!-- Ikon Dompet Uang -->
                 <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg></span>
-                <input type="number" id="harga_fulltank" placeholder="Contoh: 25000" inputmode="numeric">
+                
+                <!-- Tambahan min="1" ada di sini -->
+                <input type="number" id="harga_fulltank" placeholder="Contoh: 25000" inputmode="numeric" min="1">
             </div>
         </div>
 
@@ -95,7 +102,7 @@
             <span id="res-jarak">-</span>
         </div>
         <div class="receipt-item">
-            <span>Estimasi Bensin Yang Terpakai</span>
+            <span>Estimasi Terbakar</span>
             <span id="res-bakar">-</span>
         </div>
         <div class="receipt-item">
@@ -108,6 +115,31 @@
                 <span>UANG DISIAPKAN</span>
                 <span id="res-total">-</span>
             </div>
+            <div class="receipt-item" style="color: var(--accent-blue);">
+                <span>(Total BBM Didapat)</span>
+                <span id="res-total-liter">-</span>
+            </div>
+        </div>
+        
+        <div class="receipt-note">
+            <p>"Total yang tertera adalah harga isi Full Tank."</p>
+            <p>"Total yang tertera adalah hasil PERKIRAAN, jadi memiliki kemungkinan benar dan salah."</p>
+        </div>
+
+        <!-- Fake Barcode -->
+        <div class="barcode-section">
+            <div class="barcode"></div>
+            <p>TID: 8940-0294-118</p>
+        </div>
+
+        <button class="btn-kembali" onclick="hitungUlang()">Hitung Ulang</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+</div>
             <div class="receipt-item" style="color: var(--accent-blue);">
                 <span>(Jumlah BBM Yang Didapat)</span>
                 <span id="res-total-liter">-</span>
