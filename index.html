@@ -6,9 +6,9 @@
     <title>Fuel Calculator</title>
     
     <!-- Open Graph untuk Preview Link WhatsApp/Sosmed -->
-    <meta property="og:title" content="Kalkulator BBM">
+    <meta property="og:title" content="Kalkulator BBM ">
     <meta property="og:description" content="Hitung estimasi pengeluaran bensin untuk perjalananmu dengan mudah dan akurat!">
-    <meta property="og:image" content="Foto/preview.png"> 
+    <meta property="og:image" content="Foto/preview.jpg"> 
 
     <!-- Font yang diperbarui untuk tampilan lebih lembut dan modern -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -57,7 +57,7 @@
                     <span>Beat Deluxe ISS</span>
                 </div>
                 <div class="motor-card" onclick="pilihMotor('vario_125_old', this)">
-                    <img src="Foto/vario 125png" alt="Vario 125 Old">
+                    <img src="Foto/vario 125.png" alt="Vario 125">
                     <span>Vario 125</span>
                 </div>
                 <div class="motor-card" onclick="pilihMotor('vario_150', this)">
@@ -70,7 +70,7 @@
                 </div>
                 <div class="motor-card" onclick="pilihMotor('nmax_155', this)">
                     <img src="Foto/nmax.png" alt="NMAX 155">
-                    <span>Yamaha NMAX 155</span>
+                    <span>NMAX 155</span>
                 </div>
             </div>
             <input type="hidden" id="selected-motor" value="beat_karbu">
@@ -102,7 +102,7 @@
             <span id="res-jarak">-</span>
         </div>
         <div class="receipt-item">
-            <span>Estimasi Terbakar</span>
+            <span>Bensin Yang Terpakai</span>
             <span id="res-bakar">-</span>
         </div>
         <div class="receipt-item">
@@ -124,31 +124,6 @@
         <div class="receipt-note">
             <p>"Total yang tertera adalah harga isi Full Tank."</p>
             <p>"Total yang tertera adalah hasil PERKIRAAN, jadi memiliki kemungkinan benar dan salah."</p>
-        </div>
-
-        <!-- Fake Barcode -->
-        <div class="barcode-section">
-            <div class="barcode"></div>
-            <p>TID: 8940-0294-118</p>
-        </div>
-
-        <button class="btn-kembali" onclick="hitungUlang()">Hitung Ulang</button>
-    </div>
-</div>
-
-<script src="script.js"></script>
-</body>
-</html>
-</div>
-            <div class="receipt-item" style="color: var(--accent-blue);">
-                <span>(Jumlah BBM Yang Didapat)</span>
-                <span id="res-total-liter">-</span>
-            </div>
-        </div>
-        
-        <div class="receipt-note">
-            <p>*Total yang tertera adalah harga isi Full Tank.</p>
-            <p>*Total yang tertera adalah hasil PERKIRAAN, jadi memiliki kemungkinan benar dan salah.</p>
         </div>
 
         <!-- Fake Barcode -->
