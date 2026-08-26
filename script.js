@@ -1,4 +1,3 @@
-// 1. Database Konsumsi Motor (Realita Jalanan)
 const motorDB = {
     beat_karbu:    { konsumsi: 35 }, 
     beat_deluxe:   { konsumsi: 58 }, 
@@ -8,7 +7,6 @@ const motorDB = {
     nmax_155:      { konsumsi: 38 }  
 };
 
-// 2. Fungsi Animasi Pilih Motor di Grid
 function pilihMotor(tipe, element) {
     document.getElementById('selected-motor').value = tipe;
     const cards = document.querySelectorAll('.motor-card');
@@ -16,7 +14,6 @@ function pilihMotor(tipe, element) {
     element.classList.add('selected');
 }
 
-// 3. Fungsi Pengubah Angka Jadi Format Rupiah
 function formatRp(angka) {
     return new Intl.NumberFormat('id-ID', { 
         style: 'currency', 
@@ -25,61 +22,54 @@ function formatRp(angka) {
     }).format(angka);
 }
 
-// 4. OTAK UTAMA: Fungsi Hitung Bensin
 function hitungBensin() {
-    // Ambil input dari user
     const inputJarak = document.getElementById('jarak').value;
     const inputHarga = document.getElementById('harga_fulltank').value;
 
-    // VALIDASI 1: Cek apakah kolom masih kosong
+    // Cek Kosong
     if (inputJarak === "" || inputHarga === "") {
-        alert("Eh, isi dulu Jarak dan Harga Full Tank-nya ya!");
-        return; // Hentikan proses hitung di sini
+        alert("Harap isi Jarak dan Harga Full Tank terlebih dahulu!");
+        return; 
     }
 
-    // Ubah teks yang diketik menjadi angka desimal
     const jarakSekaliJalan = parseFloat(inputJarak);
     const hargaFullTank = parseFloat(inputHarga);
     
-    // VALIDASI 2: Cek apakah user iseng masukin angka minus atau nol
+    // Cek Minus atau Nol
     if (jarakSekaliJalan <= 0 || hargaFullTank <= 0) {
-        alert("Jarak dan Harga nggak boleh nol atau minus dong!");
-        return; // Hentikan proses hitung di sini
+        alert("Jarak dan Harga harus lebih dari angka 0!");
+        return; 
     }
 
-    // Ambil data pilihan motor dan jenis bensin
     const tipeMotor = document.getElementById('selected-motor').value;
     const hargaPerLiter = parseFloat(document.getElementById('jenis_bensin').value);
 
-    // Proses Kalkulasi Matematika
+    // Proses Hitung
     const jarakPP = jarakSekaliJalan * 2;
     const spekMotor = motorDB[tipeMotor];
     const kapasitasTangki = hargaFullTank / hargaPerLiter;
     const literDibutuhkan = jarakPP / spekMotor.konsumsi;
     
-    // Pembulatan ke atas (Math.ceil)
     let kaliMampirPom = kapasitasTangki > 0 ? Math.ceil(literDibutuhkan / kapasitasTangki) : 0;
     const uangKeluar = kaliMampirPom * hargaFullTank;
     const totalLiterDidapat = kaliMampirPom * kapasitasTangki;
 
-    // Suntikkan hasil hitungan ke dalam struk kasir HTML
+    // Suntik ke HTML
     document.getElementById('res-jarak').innerText = `${jarakPP} Km`;
     document.getElementById('res-bakar').innerText = `${literDibutuhkan.toFixed(1)} Liter`;
     document.getElementById('res-frekuensi').innerText = `${kaliMampirPom}x Full Tank`;
     document.getElementById('res-total').innerText = formatRp(uangKeluar);
     document.getElementById('res-total-liter').innerText = `${totalLiterDidapat.toFixed(1)} Liter`;
 
-    // Sembunyikan form dan munculkan animasi print struk
+    // Animasi Struk
     document.getElementById('form-section').style.display = 'none';
     const receiptBox = document.getElementById('receipt-box');
     
-    // Trik mereset animasi
     receiptBox.classList.remove('printing');
     void receiptBox.offsetWidth; 
     receiptBox.classList.add('printing');
 }
 
-// 5. Fungsi Tombol Hitung Ulang
 function hitungUlang() {
     const receiptBox = document.getElementById('receipt-box');
     receiptBox.classList.remove('printing');
